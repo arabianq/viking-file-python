@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from warnings import deprecated
 
+from itertools import chain
 import aiofiles
 from aiohttp import ClientSession, ClientResponse
 from aiohttp.client_exceptions import ContentTypeError
@@ -222,6 +223,7 @@ class AsyncVikingClient:
             tasks.append(asyncio.create_task(self.list_files(page, path)))
 
         files = await asyncio.gather(*tasks)
+        files = list(chain.from_iterable(files))
 
         return files
 
