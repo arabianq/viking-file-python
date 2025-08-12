@@ -149,7 +149,7 @@ class AsyncVikingClient:
         api_response_json = await self._get_response_json(api_response)
 
         max_pages = api_response_json.get("maxPages")
-        if max_pages:
+        if isinstance(max_pages, int):
             return max_pages
         else:
             raise ApiException(await api_response.text())

@@ -3,6 +3,6 @@ venv/
 
 .idea/
 
-.__pycache__/
+*.__pycache__/
 
 test.py
