@@ -5,7 +5,6 @@ description = "API Wrapper for ViKiNG FiLE API (https://vikingfile.com)"
 authors = [{ name = "arabianq", email = "a.tevg@ya.ru" }]
 requires-python = ">=3.10"
 readme = "README.md"
-homepage = "https://github.com/arabianq/viking-file-python"
 keywords = ["viking-file", "vikingfile", "api"]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -16,3 +15,8 @@ dependencies = [
     "aiofiles>=24.1.0",
     "aiohttp>=3.12.15",
 ]
+
+[project.urls]
+Repository = "https://github.com/arabianq/viking-file-python"
+Documentation = "https://github.com/arabianq/viking-file-python"
+Releases = "https://pypi.org/project/viking-file/#history"
