@@ -15,7 +15,7 @@ This Python library provides a convenient way to interact with the ViKiNG FiLE A
 
 ## Prerequisites
 
-* Python 3.10 or higher
+* Python 3.13 or higher
 * A ViKiNG FiLE account (if you need to upload files to your account)
 
 ## Installation Instructions
