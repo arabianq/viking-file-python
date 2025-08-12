@@ -241,7 +241,7 @@ class AsyncVikingClient:
             File: The file information.
 
         Raises:
-            FileExistsError: If the file does not exist.
+            FileNotFoundError: If the file does not exist.
         """
         file_hash = self._get_file_hash(file)
 
@@ -260,7 +260,7 @@ class AsyncVikingClient:
                 downloads=api_response_json.get("downloads")
             )
         else:
-            raise FileExistsError(f"File {file_hash} does not exist")
+            raise FileNotFoundError(f"File {file_hash} does not exist")
 
     async def rename_file(self, file: File | str, new_filename: str):
         """
