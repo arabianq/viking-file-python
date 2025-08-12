@@ -214,12 +214,8 @@ async def get_file_information():
 
     # Get file information
     file_hash = "FILE_HASH_TO_GET_INFO"  # Replace with the actual file hash
-    try:
-        file = await client.get_file(file_hash)
-        print(
-            f"File Hash: {file.hash}, Name: {file.name}, Size: {file.size}, URL: {file.url}, Downloads: {file.downloads}")
-    except FileExistsError as e:
-        print(e)
+    file = await client.get_file(file_hash)
+
 
 
 asyncio.run(get_file_information())
