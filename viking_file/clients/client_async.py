@@ -358,19 +358,21 @@ class AsyncVikingClient:
         )
         api_response.raise_for_status()
 
-        api_response_text = await api_response.text()
-        try:
-            api_response_lines = api_response_text.split("\n")
-            api_response_last_line = api_response_lines[-1].strip()
-            api_response_json = json.loads(api_response_last_line)
+        async for line in api_response.content:
+            line = line.strip()
+            line_json = json.loads(line)
+
+            if line_json.get("progress"):
+                continue
 
             return File(
-                hash=api_response_json.get("hash"),
-                name=api_response_json.get("name"),
-                size=api_response_json.get("size"),
+                hash=line_json.get("hash"),
+                name=line_json.get("name"),
+                size=line_json.get("size"),
+                downloads=0
             )
-        except Exception as _e:
-            raise ApiException(api_response_text)
+
+        raise ApiException(await api_response.text())
 
     @deprecated("Use upload_file instead", category=None)
     async def upload_file_legacy(self, filepath: Path | str, path: str = ""):

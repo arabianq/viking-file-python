@@ -1,6 +1,6 @@
 [project]
 name = "viking-file"
-version = "1.0.2"
+version = "1.0.3"
 description = "API Wrapper for ViKiNG FiLE API (https://vikingfile.com)"
 authors = [{ name = "arabianq", email = "a.tevg@ya.ru" }]
 requires-python = ">=3.13"
