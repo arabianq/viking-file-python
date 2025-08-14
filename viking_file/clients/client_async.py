@@ -252,8 +252,7 @@ class AsyncVikingClient:
             session=self._session,
             timeout=self.timeout
         )
-        api_response_json = await self._get_response_json(api_response)
-
+        api_response_json = (await self._get_response_json(api_response))[0]
         if api_response_json["exist"]:
             return File(
                 hash=api_response_json.get("hash"),
