@@ -14,8 +14,20 @@ class VikingClient(AsyncVikingClient):
         session = ClientSession(loop=self._loop)
         super().__init__(user_hash, api_timeout, session)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+
+    def close(self):
+        if not self._session.closed:
+            self._loop.run_until_complete(self._session.close())
+            self._loop.close()
+
     def _cleanup(self):
-        self._loop.run_until_complete(self._session.close())
+        if not self._session.closed:
+            self._loop.run_until_complete(self._session.close())
         self._loop.close()
 
     def get_max_pages(self, path: str = "") -> int:

@@ -38,6 +38,24 @@ class AsyncVikingClient:
 
         atexit.register(self._cleanup)
 
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        if self._close_session:
+            await self._session.close()
+
+    async def close(self):
+        """
+        Closes the client _session.
+
+        This method is a coroutine and should be used with the `await` keyword.
+
+        This method is idempotent and can be called multiple times without issue.
+        """
+        if not self._session.closed:
+            await self._session.close()
+
     def _cleanup(self):
         """
         Cleans up the client _session when exiting.
@@ -46,7 +64,7 @@ class AsyncVikingClient:
         when the program exits. It closes the client _session if it was
         created automatically by the client.
         """
-        if self._close_session:
+        if self._close_session and not self._session.closed:
             loop = asyncio.new_event_loop()
             loop.run_until_complete(self._session.close())
 
