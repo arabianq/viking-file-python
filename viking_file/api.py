@@ -20,13 +20,13 @@ async def get_upload_url(size: int, session: ClientSession = None, timeout: int 
     close_session = session is None
     session = session or ClientSession()
 
-    request_params = {
+    request_data = {
         "size": size,
     }
 
     response = await session.post(
         url=BASE_URL + "get-upload-url",
-        params=request_params,
+        data=request_data,
         timeout=timeout
     )
 
@@ -203,14 +203,14 @@ async def delete_file(file_hash: str, user: str, session: ClientSession = None, 
     close_session = session is None
     session = session or ClientSession()
 
-    request_params = {
+    request_data = {
         "hash": file_hash,
         "user": user,
     }
 
     response = await session.post(
         url=BASE_URL + "delete-file",
-        params=request_params,
+        data=request_data,
         timeout=timeout
     )
 
@@ -238,7 +238,7 @@ async def rename_file(file_hash: str, user: str, filename: str, session: ClientS
     close_session = session is None
     session = session or ClientSession()
 
-    request_params = {
+    request_data = {
         "hash": file_hash,
         "user": user,
         "filename": filename,
@@ -246,7 +246,7 @@ async def rename_file(file_hash: str, user: str, filename: str, session: ClientS
 
     response = await session.post(
         url=BASE_URL + "rename-file",
-        params=request_params,
+        data=request_data,
         timeout=timeout
     )
 
@@ -271,13 +271,13 @@ async def check_file(file_hash: str, session: ClientSession = None, timeout: int
     close_session = session is None
     session = session or ClientSession()
 
-    request_params = {
+    request_data = {
         "hash": file_hash,
     }
 
     response = await session.post(
         url=BASE_URL + "check-file",
-        params=request_params,
+        data=request_data,
         timeout=timeout
     )
 
@@ -311,7 +311,7 @@ async def list_files(user: str, page: int, path: str = "", session: ClientSessio
     if page <= 0:
         raise ValueError("Page must be positive number")
 
-    request_params = {
+    request_data = {
         "user": user,
         "page": page,
         "path": path
@@ -319,7 +319,7 @@ async def list_files(user: str, page: int, path: str = "", session: ClientSessio
 
     response = await session.post(
         url=BASE_URL + "list-files",
-        params=request_params,
+        data=request_data,
         timeout=timeout
     )
 
