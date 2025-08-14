@@ -41,6 +41,14 @@ client = VikingClient(user_hash="YOUR_USER_HASH")  # Replace with your actual us
 
 # Asynchronous client
 async_client = AsyncVikingClient(user_hash="YOUR_USER_HASH")  # Replace with your actual user hash
+
+# also you can use context manager both synchronous and asynchronous
+
+# with VikingClient(user_hash="YOUR_USER_HASH") as client:
+    # Your code here
+
+# async with AsyncVikingClient(user_hash="YOUR_USER_HASH") as async_client:
+    # Your asynchronous code here
 ```
 
 ### Uploading a Local File (Synchronous)
@@ -215,7 +223,6 @@ async def get_file_information():
     # Get file information
     file_hash = "FILE_HASH_TO_GET_INFO"  # Replace with the actual file hash
     file = await client.get_file(file_hash)
-
 
 
 asyncio.run(get_file_information())
