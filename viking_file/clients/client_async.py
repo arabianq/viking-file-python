@@ -3,7 +3,6 @@ import atexit
 import json
 import os
 from pathlib import Path
-from warnings import deprecated
 
 from itertools import chain
 import aiofiles
@@ -377,7 +376,11 @@ class AsyncVikingClient:
 
         async for line in api_response.content:
             line = line.strip()
-            line_json = json.loads(line)
+
+            try:
+                line_json = json.loads(line)
+            except json.JSONDecodeError:
+                raise ApiException(line)
 
             if line_json.get("progress"):
                 continue
@@ -391,7 +394,6 @@ class AsyncVikingClient:
 
         raise ApiException(await api_response.text())
 
-    @deprecated("Use upload_file instead", category=None)
     async def upload_file_legacy(self, filepath: Path | str, path: str = ""):
         """
         THIS METHOD IS DEPRECATED, USE upload_file INSTEAD

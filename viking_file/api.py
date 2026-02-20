@@ -8,7 +8,7 @@ BASE_URL = "https://vikingfile.com/api/"
 
 
 @asynccontextmanager
-async def _get_session(session: ClientSession | None) -> AsyncGenerator[ClientSession]:
+async def _get_session(session: ClientSession | None) -> AsyncGenerator[ClientSession, None]:
     close_session = session is None
     session = session or ClientSession()
     try:

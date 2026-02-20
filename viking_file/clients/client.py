@@ -1,6 +1,5 @@
 import asyncio
 from pathlib import Path
-from warnings import deprecated
 
 from aiohttp import ClientSession
 
@@ -57,7 +56,6 @@ class VikingClient(AsyncVikingClient):
     def upload_remote_file(self, url: str, filename: str = "", path: str = ""):
         return self._loop.run_until_complete(super().upload_remote_file(url, filename, path))
 
-    @deprecated("Use upload_file instead", category=None)
     def upload_file_legacy(self, filepath: Path | str, path: str = ""):
         return self._loop.run_until_complete(super().upload_file_legacy(filepath, path))
 
