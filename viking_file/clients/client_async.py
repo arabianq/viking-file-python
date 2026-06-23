@@ -33,7 +33,7 @@ class AsyncVikingClient:
         self.hash = user_hash
         self.timeout = api_timeout
         self._close_session = _session is None
-        self._session = _session or ClientSession()
+        self._session = _session or ClientSession(trust_env=True)
 
         atexit.register(self._cleanup)
 

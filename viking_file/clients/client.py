@@ -10,7 +10,7 @@ from viking_file.clients.client_async import AsyncVikingClient
 class VikingClient(AsyncVikingClient):
     def __init__(self, user_hash: str = "", api_timeout: int = 10):
         self._loop = asyncio.new_event_loop()
-        session = ClientSession(loop=self._loop)
+        session = ClientSession(loop=self._loop, trust_env=True)
         super().__init__(user_hash, api_timeout, session)
 
     def __enter__(self):
